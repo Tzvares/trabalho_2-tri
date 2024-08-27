@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#livros {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#livros li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#livros li:last-child {
+    border-bottom: none;
+}
