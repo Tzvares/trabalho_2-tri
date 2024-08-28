@@ -1,31 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Sistema de Biblioteca</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Sistema de Biblioteca</h1>
-    <form action="create.php" method="post">
-        <label for="titulo">Título:</label>
-        <input type="text" id="titulo" name="titulo"><br><br>
-        <label for="autor">Autor:</label>
-        <input type="text" id="autor" name="autor"><br><br>
-        <label for="ano">Ano:</label>
-        <input type="number" id="ano" name="ano"><br><br>
-        <input type="submit" value="Criar Livro">
-    </form>
-    <h2>Livros Cadastrados:</h2>
-    <ul id="livros">
-        <?php
-            require_once 'read.php';
-            $livros = readLivros($conexão);
-            foreach ($livros as $livro) {
-                echo "<li>$livro[titulo] - $livro[autor] ($livro[ano]) <a href='update.php?id=$livro[id]'>Editar</a> | <a href='delete.php?id=$livro[id]'>Excluir</a></li>";
-            }
-        ?>
-    </ul>
+<?php
+require_once 'admin.php';
 
-    <script src="script.js"></script>
-</body>
-</html>
+echo "<h1>Biblioteca</h1>";
+echo "<p>Bem-vindo à nossa biblioteca!</p>";
+echo "<p><a href='create.php'>Cadastrar novo livro</a></p>";
+echo "<p><a href='read.php'>Ver todos os livros</a></p>";
+echo "<p><a href='delete.php'>Deletar livro</a></p>";
+echo "<p><a href='update.php'>Editar livro</a></p>";
+
+
+?>

@@ -1,37 +1,17 @@
 <?php
 require_once 'admin.php';
 
-$query = "SELECT * FROM livros";
-$result = mysqli_query($conexao, $query);
+$sql = "SELECT * FROM livros";
+$result = mysqli_query($conexao, $sql);
 
-$livros = array();
-while ($row = mysqli_fetch_assoc($result)) {
-    $livros[] = $row;
-}
-
-
-//ler livros
-
-return $livros;
-
-function readLivros($conexao) {
-    $sql = "SELECT * FROM livros";
-    $result = mysqli_query($conexao, $sql);
-
-    // Verificar se há result
-    if (mysqli_num_rows($result) > 0) {
-        // Ler result
-        while($row = mysqli_fetch_assoc($result)) {
-            $livros[] = $row;
-        }
-    } else {
-        $livros = array();
+if (mysqli_num_rows($result) > 0) {
+    echo "<h1>Livros cadastrados</h1>";
+    echo "<ul>";
+    while($row = mysqli_fetch_assoc($result)) {
+        echo "<li>ID: " . $row["id"] . " - Titulo: " . $row["titulo"] . " - Autor: " . $row["autor"] . " - Ano: " . $row["ano"] . "</li>";
     }
-
-    // Fechar conexão
-    mysqli_close($conexao);
-
-    // Retornar array de livros
-    return $livros;
+    echo "</ul>";
+} else {
+    echo "<p>Nenhum livro cadastrado.</p>";
 }
 ?>
