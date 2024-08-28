@@ -19,7 +19,7 @@
     <ul id="livros">
         <?php
             require_once 'read.php';
-            $livros = readLivros();
+            $livros = readLivros($conexão);
             foreach ($livros as $livro) {
                 echo "<li>$livro[titulo] - $livro[autor] ($livro[ano]) <a href='update.php?id=$livro[id]'>Editar</a> | <a href='delete.php?id=$livro[id]'>Excluir</a></li>";
             }
