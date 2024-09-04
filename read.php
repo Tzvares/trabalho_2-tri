@@ -14,4 +14,7 @@ if (mysqli_num_rows($result) > 0) {
 } else {
     echo "<p>Nenhum livro cadastrado.</p>";
 }
+
+echo "<p><a href='index.php'>Voltar à página inicial</a></p>";
+
 ?>

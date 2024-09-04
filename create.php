@@ -14,7 +14,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     mysqli_query($conexao, $sql);
 
     echo "<p>Livro cadastrado com sucesso!</p>";
-    echo "<p><a href='index.php'>Voltar à página inicial</a></p>";
 } else {
     ?>
     <h1>Cadastrar novo livro</h1>
@@ -31,4 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </form>
     <?php
 }
+echo "<p><a href='index.php'>Voltar à página inicial</a></p>";
+
 ?>

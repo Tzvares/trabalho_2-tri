@@ -44,4 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Erro ao atualizar livro: " . mysqli_error($conexao);
     }
 }
+
+echo "<p><a href='index.php'>Voltar à página inicial</a></p>";
+
 ?>
