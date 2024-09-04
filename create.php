@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     ?>
     <h1>Cadastrar novo livro</h1>
     <form method="post">
-        <label for="titulo">titulo do livro:</label>
+        <label for="titulo">Titulo do livro:</label>
         <input type="text" id="titulo" name="titulo"><br><br>
         <label for="autor">Autor do livro:</label>
         <input type="text" id="autor" name="autor"><br><br>
