@@ -42,7 +42,7 @@ $hasLivros = mysqli_num_rows($result) > 0;
     // Define o foto antes que ele seja selecionado
     if (isset($_FILES["foto"])) {
       $foto = $_FILES["foto"];
-      $target_dir = "../Source/";
+      $target_dir = "../uploads/";
       $target_file = $target_dir . basename($foto["name"]);
 
       if (move_uploaded_file($foto["tmp_name"], $target_file)) {
