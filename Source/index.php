@@ -8,8 +8,6 @@
 </head>
 <body>
     <?php
-    require_once 'admin.php';
-
     echo "<h1>Biblioteca</h1>";
     echo  "<p>livros</p>";
     echo "<p><a href='../crudBook/create.php'>Cadastrar novo livro</a></p>";

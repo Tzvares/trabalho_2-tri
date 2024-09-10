@@ -1,12 +1,27 @@
 <?php
 require_once '../Source/admin.php';
 
+// Conexão com o servidor MySQL
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "biblioteca";
+
+// Criar conexão
+$conexao = mysqli_connect($servername, $username, $password, $dbname);
+
+// Verificar conexão
+if (!$conexao) {
+    die("Erro ao conectar ao servidor MySQL: " . mysqli_connect_error());
+}
+
+// Selecionar livros
 $sql = "SELECT * FROM livros";
 $result = mysqli_query($conexao, $sql);
 $hasLivros = mysqli_num_rows($result) > 0; // Evita a utilização se não há livros cadastrados
-?>
 
-<?php if ($hasLivros): ?>
+if ($hasLivros):
+?>
   <h1>Deletar livro</h1>
   <form method="post">
     <label for="titulo">Selecione o livro:</label>
@@ -23,15 +38,19 @@ $hasLivros = mysqli_num_rows($result) > 0; // Evita a utilização se não há l
 
   <?php
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $titulo = $_POST["titulo"];
+    $titulo = $_POST["titulo"] ?? null;
 
-    $sql = "DELETE FROM livros WHERE titulo = '$titulo'";
-    $result = mysqli_query($conexao, $sql);
+    if ($titulo !== null) {
+        $titulo = mysqli_real_escape_string($conexao, $titulo);
 
-    if ($result) {
-      echo "<p>Livro deletado com sucesso!</p>";
-    } else {
-      echo "Erro ao deletar livro: " . mysqli_error($conexao);
+        $sql = "DELETE FROM livros WHERE titulo = '$titulo'";
+        $result = mysqli_query($conexao, $sql);
+
+        if ($result) {
+            echo "<p>Livro deletado com sucesso!</p>";
+        } else {
+            echo "Erro ao deletar livro: " . mysqli_error($conexao);
+        }
     }
   }
   ?>
