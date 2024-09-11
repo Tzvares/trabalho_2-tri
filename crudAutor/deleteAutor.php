@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="styleAutor.css?v=<?php echo time(); ?>">
+<div class="container">
 <?php
 require_once '../Source/admin.php';
 

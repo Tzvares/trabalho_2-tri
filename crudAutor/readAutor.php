@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="styleAutor.css?v=<?php echo time(); ?>">
+<div class="container">
 <?php
 require_once '../Source/admin.php';
 
@@ -18,3 +20,4 @@ if (mysqli_num_rows($result) > 0) {
 echo "<p><a href='../Source/index.php'>Voltar à página inicial</a></p>";
 
 ?>
+</div>

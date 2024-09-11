@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="styleBook.css?v=<?php echo time(); ?>">
+<div class="container">
 <?php
 require_once '../Source/admin.php';
 
@@ -15,9 +17,9 @@ if (!$conexao) {
 $sql = "SELECT * FROM livros";
 $result = mysqli_query($conexao, $sql);
 $hasLivros = mysqli_num_rows($result) > 0; // Evita a utilização se não há livros cadastrados
-
-if ($hasLivros):
 ?>
+
+<?php if ($hasLivros): ?>
   <h1>Deletar livro</h1>
   <form method="post">
     <label for="titulo">Selecione o livro:</label>
@@ -34,19 +36,15 @@ if ($hasLivros):
 
   <?php
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $titulo = $_POST["titulo"] ?? null;
+    $titulo = $_POST["titulo"];
 
-    if ($titulo !== null) {
-        $titulo = mysqli_real_escape_string($conexao, $titulo);
+    $sql = "DELETE FROM livros WHERE titulo = '$titulo'";
+    $result = mysqli_query($conexao, $sql);
 
-        $sql = "DELETE FROM livros WHERE titulo = '$titulo'";
-        $result = mysqli_query($conexao, $sql);
-
-        if ($result) {
-            echo "<p>Livro deletado com sucesso!</p>";
-        } else {
-            echo "Erro ao deletar livro: " . mysqli_error($conexao);
-        }
+    if ($result) {
+      echo "<p>Livro deletado com sucesso!</p>";
+    } else {
+      echo "Erro ao deletar livro: " . mysqli_error($conexao);
     }
   }
   ?>
@@ -55,3 +53,4 @@ if ($hasLivros):
 <?php endif;?>
 
 <p><a href='../Source/index.php'>Voltar à página inicial</a></p>
+</div>

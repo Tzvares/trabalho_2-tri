@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="styleBook.css?v=<?php echo time(); ?>">
+<div class="container">
 <h1>Editar livro</h1>
 
 <?php
@@ -34,7 +36,7 @@ $hasLivros = mysqli_num_rows($result) > 0;
         ?>
     </select><br>
     <label for="ano">Ano:</label>
-    <input type="text" name="ano" id="ano">
+    <input type="date" name="ano" id="ano">
     <br>
     <label for="foto">Foto de capa:</label>
     <input type="file" name="foto" id="foto">
@@ -106,3 +108,4 @@ $hasLivros = mysqli_num_rows($result) > 0;
 <?php endif;?>
 
 <p><a href='../Source/index.php'>Voltar à página inicial</a></p>
+</div>

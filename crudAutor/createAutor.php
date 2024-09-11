@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="styleAutor.css?v=<?php echo time(); ?>">
+<div class="container">
 <?php
 require_once '../Source/admin.php';
 
@@ -33,3 +35,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 echo "<p><a href='../Source/index.php'>Voltar à página inicial</a></p>";
 ?>
+</div>
