@@ -36,8 +36,6 @@ CREATE TABLE `autores` (
 -- Despejando dados para a tabela `autores`
 --
 
-INSERT INTO `autores` (`id_autor`, `nome`) VALUES
-(12, 'saint-exupery');
 
 -- --------------------------------------------------------
 
@@ -59,8 +57,7 @@ CREATE TABLE `emprestimos` (
 -- Despejando dados para a tabela `emprestimos`
 --
 
-INSERT INTO `emprestimos` (`id_emprestimo`, `nome_pessoa`, `email_pessoa`, `data_emprestimo`, `titulo`, `data_devolucao`, `fk_id_livro`) VALUES
-(52, 'joao', 'joao@gmail.com', '2024-09-11', '', '2024-09-12', 16);
+
 
 -- --------------------------------------------------------
 
@@ -80,8 +77,7 @@ CREATE TABLE `livros` (
 -- Despejando dados para a tabela `livros`
 --
 
-INSERT INTO `livros` (`id_livro`, `foto`, `titulo`, `autor`, `ano`) VALUES
-(16, 0x2e2e2f75706c6f6164732f646f776e6c6f61642e6a706567, 'o pequeno principe', 'saint-exupery', 1944);
+
 
 --
 -- Índices para tabelas despejadas
