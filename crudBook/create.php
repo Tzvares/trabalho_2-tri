@@ -92,7 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="titulo">Título do Livro:</label>
             <input type="text" id="titulo" name="titulo" required><br><br>
             <label for="ano">Ano do Livro:</label>
-            <input type="date" id="ano" name="ano" required><br><br>
+            <input type="text" id="ano" name="ano" required><br><br>
             <label for="foto">Foto de Capa:</label>
             <input type="file" id="foto" name="foto" required><br><br>
             <input type="submit" value="Cadastrar">
