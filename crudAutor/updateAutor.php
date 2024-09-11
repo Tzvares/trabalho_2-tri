@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="styleAutor.css?v=<?php echo time(); ?>">
+<div class="container">
 <h1>Editar livro</h1>
 
 <?php
@@ -46,3 +48,4 @@ if ($hasAutores): ?>
 <?php endif;?>
 
 <p><a href='../Source/index.php'>Voltar à página inicial</a></p>
+</div>
