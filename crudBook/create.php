@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="styleBook.css?v=<?php echo time(); ?>">
+<div class="container">
 <?php
 require_once '../Source/admin.php';
 
@@ -29,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="autor">Autor do livro:</label>
         <input type="text" id="autor" name="autor"><br><br>
         <label for="ano">Ano do livro:</label>
-        <input type="number" id="ano" name="ano"><br><br>
+        <input type="date" id="ano" name="ano"><br><br>
         <label for="foto">Foto de capa:</label>
         <input type="file" id="foto" name="foto"><br><br>
         <input type="submit" value="Cadastrar">
@@ -38,3 +40,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 echo "<p><a href='../Source/index.php'>Voltar à página inicial</a></p>";
 ?>
+</div>
