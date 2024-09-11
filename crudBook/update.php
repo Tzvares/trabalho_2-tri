@@ -7,7 +7,6 @@ $result = mysqli_query($conexao, $sql);
 $hasLivros = mysqli_num_rows($result) > 0;
 ?>
 
-
 <?php if ($hasLivros): ?>
   <form method="post" enctype="multipart/form-data">
     <label for="titulo">Selecione o livro:</label>
@@ -20,9 +19,20 @@ $hasLivros = mysqli_num_rows($result) > 0;
     <label for="novo_titulo">Novo título:</label>
     <input type="text" name="novo_titulo" id="novo_titulo">
     <br>
-    <label for="autor">Autor:</label>
-    <input type="text" name="autor" id="autor">
-    <br>
+    <label for="autor">Selecione o autor:</label>
+    <select id="autor" name="autor">
+        <?php
+        $sql = "SELECT id_autor, nome FROM autores";
+        $result = mysqli_query($conexao, $sql);
+        if (!$result) {
+            echo "<p>Error: " . mysqli_error($conexao) . "</p>";
+        } else {
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<option value='" . $row['nome'] . "'>" . $row['nome'] . "</option>";
+            }
+        }
+        ?>
+    </select><br>
     <label for="ano">Ano:</label>
     <input type="text" name="ano" id="ano">
     <br>
@@ -38,32 +48,56 @@ $hasLivros = mysqli_num_rows($result) > 0;
     $novo_titulo = $_POST["novo_titulo"];
     $autor = $_POST["autor"];
     $ano = $_POST["ano"];
+    $foto = $_FILES["foto"];
 
-    // Define o foto antes que ele seja selecionado
-    if (isset($_FILES["foto"])) {
-      $foto = $_FILES["foto"];
-      $target_dir = "../uploads/";
-      $target_file = $target_dir . basename($foto["name"]);
+    $erros = array();
+    if (empty($novo_titulo)) {
+        $erros[] = "Novo título do livro é obrigatório";
+    }
+    if (empty($ano)) {
+        $erros[] = "Ano do livro é obrigatório";
+    }
+    if (!isset($foto) || $foto["size"] == 0) {
+        $erros[] = "Foto de capa é obrigatória";
+    }
 
-      if (move_uploaded_file($foto["tmp_name"], $target_file)) {
-        $sql = "UPDATE livros SET titulo = '$novo_titulo', autor = '$autor', ano = '$ano', foto = '$target_file' WHERE titulo = '$titulo'";
-        $result = mysqli_query($conexao, $sql);
+    if (count($erros) > 0) {
+        echo "<p>Erro: </p><ul>";
+        foreach ($erros as $erro) {
+            echo "<li>$erro</li>";
+        }
+        echo "</ul>";
+    } else {
+        // Checa se o autor já existe
+        $sql_check_autor = "SELECT * FROM livros WHERE autor = '$autor'";
+        $result_check_autor = mysqli_query($conexao, $sql_check_autor);
+        $tem_autor = mysqli_num_rows($result_check_autor) > 0;
+
+        if ($tem_autor) {
+            $sql_update = "UPDATE livros SET titulo = '$novo_titulo', ano = '$ano'";
+        } else {
+            $sql_update = "UPDATE livros SET titulo = '$novo_titulo', autor = '$autor', ano = '$ano'";
+        }
+
+        // Define a foto antes de seleciona-la
+        if (isset($_FILES["foto"])) {
+            $foto = $_FILES["foto"];
+            $target_dir = "../uploads/";
+            $target_file = $target_dir . basename($foto["name"]);
+
+            if (move_uploaded_file($foto["tmp_name"], $target_file)) {
+                $sql_update .= ", foto = '$target_file'";
+            }
+        }
+
+        $sql_update .= " WHERE titulo = '$titulo'";
+        $result = mysqli_query($conexao, $sql_update);
 
         if ($result) {
-          echo "Livro atualizado com sucesso!";
+            echo "Livro atualizado com sucesso!";
         } else {
-          echo "Erro ao atualizar livro: " . mysqli_error($conexao);
+            echo "Erro ao atualizar livro: " . mysqli_error($conexao);
         }
-      }
-    } else {
-      $sql = "UPDATE livros SET titulo = '$novo_titulo', autor = '$autor', ano = '$ano' WHERE titulo = '$titulo'";
-      $result = mysqli_query($conexao, $sql);
-
-      if ($result) {
-        echo "Livro atualizado com sucesso!";
-      } else {
-        echo "Erro ao atualizar livro: " . mysqli_error($conexao);
-      }
     }
   }
 ?>

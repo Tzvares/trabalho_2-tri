@@ -1,21 +1,17 @@
 <?php
 require_once '../Source/admin.php';
 
-// Conexão com o servidor MySQL
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "biblioteca";
 
-// Criar conexão
 $conexao = mysqli_connect($servername, $username, $password, $dbname);
 
-// Verificar conexão
 if (!$conexao) {
     die("Erro ao conectar ao servidor MySQL: " . mysqli_connect_error());
 }
 
-// Selecionar livros
 $sql = "SELECT * FROM livros";
 $result = mysqli_query($conexao, $sql);
 $hasLivros = mysqli_num_rows($result) > 0; // Evita a utilização se não há livros cadastrados

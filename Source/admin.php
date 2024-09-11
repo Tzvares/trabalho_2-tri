@@ -1,7 +1,7 @@
 <?php
 require_once '../Source/admin.php';
 
-// Conexão com o servidor MySQL
+// Conexão com o servidor
 $servername = "localhost";
 $username = "root";
 $password = "";
